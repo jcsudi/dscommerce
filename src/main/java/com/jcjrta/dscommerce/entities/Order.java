@@ -16,8 +16,8 @@ public class Order {
     private Long id;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant momemt;
-    private OrderStatus staus;
+    private Instant moment;
+    private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -31,10 +31,10 @@ public class Order {
     public Order(){
     }
 
-    public Order(Long id, Instant momemt, OrderStatus staus) {
+    public Order(Long id, Instant moment, OrderStatus status) {
         this.id = id;
-        this.momemt = momemt;
-        this.staus = staus;
+        this.moment = moment;
+        this.status = status;
     }
 
     public Long getId() {
@@ -46,19 +46,19 @@ public class Order {
     }
 
     public Instant getMomemt() {
-        return momemt;
+        return moment;
     }
 
     public void setMomemt(Instant momemt) {
-        this.momemt = momemt;
+        this.moment = moment;
     }
 
     public OrderStatus getStaus() {
-        return staus;
+        return status;
     }
 
-    public void setStaus(OrderStatus staus) {
-        this.staus = staus;
+    public void setStaus(OrderStatus status) {
+        this.status = status;
     }
 
     public User getClient() {
