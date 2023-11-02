@@ -41,4 +41,10 @@ public class ProductController {
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dt.getId()).toUri();
        return ResponseEntity.created(uri).body(dt);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto){
+        ProductDTO dt = service.update(id, dto);
+        return ResponseEntity.ok(dt);
+    }
 }
