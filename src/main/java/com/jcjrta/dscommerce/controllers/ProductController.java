@@ -7,11 +7,11 @@ import com.jcjrta.dscommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,15 +23,22 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping(value = "/{id}")
-    public ProductDTO find(@PathVariable Long id){
+    public ResponseEntity<ProductDTO> find(@PathVariable Long id){
         ProductDTO dt = service.f(id);
-        return dt;
+        return ResponseEntity.ok(dt);
     }
 
     @GetMapping
-    public Page<ProductDTO> findAll(Pageable pageable){
+    public ResponseEntity< Page<ProductDTO>> findAll(Pageable pageable){
         Page<ProductDTO> r= service.findAll(pageable);
-        return r;
+        return ResponseEntity.ok(r);
         //return service.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto){
+       ProductDTO dt = service.insert(dto);
+       URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dt.getId()).toUri();
+       return ResponseEntity.created(uri).body(dt);
     }
 }
