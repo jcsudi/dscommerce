@@ -4,7 +4,7 @@ import com.jcjrta.dscommerce.dto.CustomError;
 import com.jcjrta.dscommerce.dto.ValidationError;
 import com.jcjrta.dscommerce.services.exceptions.DatabaseExceptions;
 import com.jcjrta.dscommerce.services.exceptions.ResourceNotFoundExceptions;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

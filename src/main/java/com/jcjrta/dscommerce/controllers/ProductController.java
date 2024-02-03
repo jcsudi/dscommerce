@@ -4,8 +4,9 @@ import com.jcjrta.dscommerce.dto.ProductDTO;
 import com.jcjrta.dscommerce.entities.Product;
 import com.jcjrta.dscommerce.repositories.ProductRepository;
 import com.jcjrta.dscommerce.services.ProductService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,9 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity< Page<ProductDTO>> findAll(Pageable pageable){
-        Page<ProductDTO> r= service.findAll(pageable);
+    public ResponseEntity< Page<ProductDTO>> findAll(
+            @RequestParam(name = "name", defaultValue = "") String name, Pageable pageable){
+        Page<ProductDTO> r= service.findAll(name, pageable);
         return ResponseEntity.ok(r);
         //return service.findAll();
     }

@@ -1,6 +1,6 @@
 package com.jcjrta.dscommerce.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import jdk.jfr.Label;
 
 import java.time.Instant;
