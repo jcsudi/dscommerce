@@ -1,7 +1,9 @@
 package com.jcjrta.dscommerce.services;
 
+import com.jcjrta.dscommerce.dto.CategoryDTO;
 import com.jcjrta.dscommerce.dto.ProductDTO;
 import com.jcjrta.dscommerce.dto.ProductMinDTO;
+import com.jcjrta.dscommerce.entities.Category;
 import com.jcjrta.dscommerce.entities.Product;
 import com.jcjrta.dscommerce.repositories.ProductRepository;
 import com.jcjrta.dscommerce.services.exceptions.DatabaseExceptions;
@@ -49,6 +51,7 @@ public class ProductService {
         Product entitySalvar = repository.save(entity);
         ProductDTO dt = new ProductDTO(entitySalvar);
         return dt;
+
     }
 
     @Transactional
@@ -84,5 +87,11 @@ public class ProductService {
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
         entity.setDescription(dto.getDescription());
+        entity.getCategories().clear();
+        for (CategoryDTO catDTO : dto.getCategories()){
+            Category cat = new Category();
+            cat.setId(catDTO.getId());
+            entity.getCategories().add(cat);
+        }
     }
 }

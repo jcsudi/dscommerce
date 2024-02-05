@@ -1,10 +1,14 @@
 package com.jcjrta.dscommerce.dto;
 
+import com.jcjrta.dscommerce.entities.Category;
 import com.jcjrta.dscommerce.entities.Product;
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDTO {
 
@@ -22,6 +26,9 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    @NotEmpty(message = "Deve ter pelo menos uma cetogoria")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
     public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -36,7 +43,9 @@ public class ProductDTO {
         this.description = p.getDescription();
         this.price = p.getPrice();
         this.imgUrl = p.getImgUrl();
-
+        for (Category cat : p.getCategories()){
+            categories.add(new CategoryDTO(cat));
+        }
     }
 
     public Long getId() {
@@ -57,5 +66,9 @@ public class ProductDTO {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
     }
 }
