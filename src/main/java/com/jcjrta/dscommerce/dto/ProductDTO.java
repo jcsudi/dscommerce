@@ -3,10 +3,7 @@ package com.jcjrta.dscommerce.dto;
 import com.jcjrta.dscommerce.entities.Category;
 import com.jcjrta.dscommerce.entities.Product;
 import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +19,7 @@ public class ProductDTO {
     @NotBlank(message = "Campo requerido")
     private String description;
 
+    @NotNull(message = "Campo requerido")
     @Positive(message = "O preço precisa ser positivo")
     private Double price;
     private String imgUrl;
